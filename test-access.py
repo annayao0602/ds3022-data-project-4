@@ -44,11 +44,7 @@ def generate_test_event():
     try:
         s3 = boto3.client('s3')
         s3.upload_file('test-event.json', BUCKET_NAME, f'test-event-{event_key}.json')
-<<<<<<< HEAD
         #then delete the file
-=======
-        # then delete the file
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
         os.remove('test-event.json')
     except Exception as e:
         print(f"Error uploading to S3: {e}")
