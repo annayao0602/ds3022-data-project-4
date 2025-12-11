@@ -3,7 +3,7 @@
 Set up an event-driven data pipeline using Amazon S3, Lambda, DynamoDB, and the API Gateway. The aims of this solution are:
 
 1. New data arrives in an S3 bucket. This is a JSON file with an expected format.
-2. This triggers a Lambda function that ingests the data, deserializes the JSON, and inserts it into DynamoDB.
+2. This triggers a Lambda function that ingests the data, deserializes the JSON, and inserts it into a DynamoDB table.
 3. Finally, all data is made available via a `GET` request from a public API.
 
 - - -
@@ -14,7 +14,19 @@ Set up an event-driven data pipeline using Amazon S3, Lambda, DynamoDB, and the 
 
 [Source Template](dp4-launch-template.yaml)
 
-This assumes that users have an active set of AWS credentials installed locally.
+This assumes that users have an active set of AWS credentials installed locally. **Be sure that your AWS command-line keys correlate to the account you use to sign into the AWS Console.**
+
+GitHub Codespaces can be used for this project, but the AWS CLI and your keys must be installed:
+
+```
+$ sudo pip install awscli
+```
+Then configure the CLI with your keys with this command:
+```
+$ aws configure
+```
+
+![Overview Image](architecture.png)
 
 This stack creates:
 
