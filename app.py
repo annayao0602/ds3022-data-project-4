@@ -11,7 +11,6 @@ app.debug = True
 S3_BUCKET = os.environ.get('APP_BUCKET_NAME', '')
 DYNAMODB_TABLE_NAME = os.environ.get('DYNAMODB_TABLE_NAME', '')
 
-<<<<<<< HEAD
 #triggers when json files are uploaded to S3
 @app.on_s3_event(bucket=S3_BUCKET, events=['s3:ObjectCreated:*'], suffix='.json')
 def s3_handler(event):
@@ -23,14 +22,6 @@ def s3_handler(event):
     #inserts data into table in dynamodb
     insert_data_into_dynamodb(data)
     #returns the data
-=======
-
-@app.on_s3_event(bucket=S3_BUCKET, events=['s3:ObjectCreated:*'], suffix='.json')
-def s3_handler(event):
-    app.log.debug(f"Received bucket event: {event.bucket}, key: {event.key}")
-    data = get_s3_object(event.bucket, event.key)
-    insert_data_into_dynamodb(data)
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
     return data
 
 #get object from s3
@@ -39,14 +30,9 @@ def get_s3_object(bucket, key):
     try:
         response = s3.get_object(Bucket=bucket, Key=key)
         return json.loads(response['Body'].read().decode('utf-8'))
-<<<<<<< HEAD
     except ClientError as e:
         app.log.error(f"Error fetching object from S3: {e}")
         raise e
-=======
-    except Exception as e:
-        print(e)
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
 
 def insert_data_into_dynamodb(data):
     dynamodb = boto3.resource('dynamodb')
@@ -74,17 +60,11 @@ def get_access():
     table = dynamodb.Table(DYNAMODB_TABLE_NAME)
     try:
         items = table.scan()['Items']
-<<<<<<< HEAD
         #different lambda from aws - one line function to sort by access time
-=======
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
         sorted_items = sorted(items, key=lambda x: x['access_time'])
         return sorted_items
     except ClientError as e:
         app.log.error(f"Error scanning DynamoDB table: {e}")
         raise e
-<<<<<<< HEAD
    
     
-=======
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
