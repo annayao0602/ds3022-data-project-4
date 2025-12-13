@@ -1,17 +1,10 @@
 {
   "version": "2.0",
   "app_name": "s3-events",
-<<<<<<< HEAD
-  "environment_variables": {
-    "APP_BUCKET_NAME": "zzz2bx-access",
-    "DYNAMODB_TABLE_NAME": "access"
-  },
-=======
->>>>>>> 7f029cd45208f7c437918a08a366ee553f4eaf6f
   "stages": {
     "dev": {
       "environment_variables": {
-        "APP_BUCKET_NAME": "BUCKET_NAME",
+        "APP_BUCKET_NAME": "zzz2bx-access",
         "DYNAMODB_TABLE_NAME": "access"
       },
       "lambda_memory_size": 128,
